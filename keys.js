@@ -16,6 +16,25 @@ async function loadKeys() {
     listItem.textContent = key;
     keyListContainer.appendChild(listItem);
   });
+
+  // Обработчик события ввода в поле поиска
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', function() {
+    const searchValue = this.value.trim().toLowerCase();
+    const filteredKeys = keysList.filter(key => key.toLowerCase().startsWith(searchValue));
+    displayFilteredKeys(filteredKeys);
+  });
+}
+
+// Функция для отображения отфильтрованного списка ключей
+function displayFilteredKeys(filteredKeys) {
+  const keyListContainer = document.getElementById('keyList');
+  keyListContainer.innerHTML = ''; // Очистка текущего списка
+  filteredKeys.forEach(key => {
+    const listItem = document.createElement('li');
+    listItem.textContent = key;
+    keyListContainer.appendChild(listItem);
+  });
 }
 
 // Загрузка списка ключей при загрузке страницы
