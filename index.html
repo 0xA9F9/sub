@@ -1,21 +1,15 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мой сайт</title>
+  <title>Список ключей</title>
 </head>
 <body>
-  <h1 id="title"></h1>
-  <p id="description"></p>
-<script>// Загрузка данных из файла data.json
-fetch('data.json')
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('title').innerText = data.title;
-    document.getElementById('description').innerText = data.description;
-  })
-  .catch(error => console.error('Ошибка загрузки данных:', error));
-</script>
+  <h1>Список ключей</h1>
+  <ul id="keyList"></ul>
+  <script src="keys.js"></script>
 </body>
 </html>
