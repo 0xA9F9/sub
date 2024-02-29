@@ -4,11 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Список ключей</title>
+  <style> @media all { 
+  .z-z-z {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+  .search {
+    appearance: none;
+    border: 1px solid black;
+    padding: 5px;
+    outline: none;
+}
+} </style>
 </head>
 <body>
   <div class="z-z-z">
-  <h1>Список ключей</h1>
-  <input type="text" id="searchInput" placeholder="Поиск по ключам">
+  <input type="text" id="searchInput" class="search" placeholder="Поиск по ключам">
   <ul id="keyList" style="display: none;"></ul> <!-- Скрываем список ключей по умолчанию -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <script src="keys.js"></script>
