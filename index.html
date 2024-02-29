@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видео</title>
+</head>
+<body>
+    <div id="videoList"></div>
+    <script>
+        // Загрузка данных из JSON
+        fetch('videos.json')
+            .then(response => response.json())
+            .then(data => {
+                // Обработка данных
+                const videoList = document.getElementById('videoList');
+                data.forEach(video => {
+                    // Создание элементов для каждого видео
+                    const videoElement = document.createElement('div');
+                    videoElement.innerHTML = `
+                        <h2>${video.title}</h2>
+                        <iframe width="560" height="315" src="${video.url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    `;
+                    videoList.appendChild(videoElement);
+                });
+            })
+            .catch(error => console.error('Ошибка загрузки данных:', error));
+    </script>
+</body>
+</html>
