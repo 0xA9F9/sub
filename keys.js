@@ -1,4 +1,4 @@
-// script.js
+// keys.js
 
 // Функция для загрузки и обработки файла keys.toml
 async function loadKeys() {
