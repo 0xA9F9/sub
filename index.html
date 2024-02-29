@@ -9,5 +9,12 @@
   <h1 id="title"></h1>
   <p id="description"></p>
   <script src="data.js"></script>
+<script> fetch('data.json')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('title').innerText = data.title;
+    document.getElementById('description').innerText = data.description;
+  })
+  .catch(error => console.error('Ошибка загрузки данных:', error)); </script>
 </body>
 </html>
