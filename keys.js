@@ -14,17 +14,17 @@ async function loadKeys() {
   searchInput.addEventListener('input', function() {
     const searchValue = this.value.trim().toLowerCase();
     const filteredKeys = keysList.filter(key => key.toLowerCase().startsWith(searchValue));
-    displayFilteredKeys(filteredKeys);
+    displayFilteredKeys(filteredKeys, searchValue);
   });
 }
 
 // Функция для отображения отфильтрованного списка ключей
-function displayFilteredKeys(filteredKeys) {
+function displayFilteredKeys(filteredKeys, searchValue) {
   const keyListContainer = document.getElementById('keyList');
   keyListContainer.innerHTML = ''; // Очистка текущего списка
 
-  if (filteredKeys.length === 0) {
-    keyListContainer.style.display = 'none'; // Скрыть список ключей, если результаты поиска пусты
+  if (searchValue === '') {
+    keyListContainer.style.display = 'none'; // Скрыть список ключей, если поле поиска пустое
   } else {
     keyListContainer.style.display = 'block'; // Показать список ключей, если есть результаты поиска
     filteredKeys.forEach(key => {
