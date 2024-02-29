@@ -38,42 +38,6 @@
     </style>
 </head>
 <body>
-    <div id="videoList"></div>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <iframe id="videoFrame" class="modal-video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Загрузка данных из JSON
-            fetch('no.json')
-                .then(response => response.json())
-                .then(data => {
-                    // Обработка данных
-                    const videoList = document.getElementById('videoList');
-                    data.forEach(video => {
-                        // Создание ссылок для каждого видео
-                        const videoLink = document.createElement('a');
-                        videoLink.textContent = video.title;
-                        videoLink.href = video.url;
-                        videoLink.addEventListener('click', function(event) {
-                            event.preventDefault();
-                            document.getElementById('myModal').style.display = 'block';
-                            document.getElementById('videoFrame').src = this.href;
-                        });
-                        videoList.appendChild(videoLink);
-                    });
-                })
-                .catch(error => console.error('Ошибка загрузки данных:', error));
-            
-            // Закрытие модального окна при клике на "крестик"
-            document.querySelector('.close').addEventListener('click', function() {
-                document.getElementById('myModal').style.display = 'none';
-                document.getElementById('videoFrame').src = '';
-            });
-        });
-    </script>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ODuQCA88oY4?si=xvYn0rnjhfBbUJuy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </body>
 </html>
