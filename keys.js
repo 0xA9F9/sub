@@ -9,14 +9,6 @@ async function loadKeys() {
   const keysObject = jsyaml.load(keysData);
   const keysList = keysObject.keys;
 
-  // Вывод списка ключей на веб-странице
-  const keyListContainer = document.getElementById('keyList');
-  keysList.forEach(key => {
-    const listItem = document.createElement('li');
-    listItem.textContent = key;
-    keyListContainer.appendChild(listItem);
-  });
-
   // Обработчик события ввода в поле поиска
   const searchInput = document.getElementById('searchInput');
   searchInput.addEventListener('input', function() {
@@ -30,11 +22,17 @@ async function loadKeys() {
 function displayFilteredKeys(filteredKeys) {
   const keyListContainer = document.getElementById('keyList');
   keyListContainer.innerHTML = ''; // Очистка текущего списка
-  filteredKeys.forEach(key => {
-    const listItem = document.createElement('li');
-    listItem.textContent = key;
-    keyListContainer.appendChild(listItem);
-  });
+
+  if (filteredKeys.length === 0) {
+    keyListContainer.style.display = 'none'; // Скрыть список ключей, если результаты поиска пусты
+  } else {
+    keyListContainer.style.display = 'block'; // Показать список ключей, если есть результаты поиска
+    filteredKeys.forEach(key => {
+      const listItem = document.createElement('li');
+      listItem.textContent = key;
+      keyListContainer.appendChild(listItem);
+    });
+  }
 }
 
 // Загрузка списка ключей при загрузке страницы
