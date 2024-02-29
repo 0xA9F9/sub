@@ -19,4 +19,4 @@ async function loadKeys() {
 }
 
 // Загрузка списка ключей при загрузке страницы
-window.onload = loadKeys;
+document.addEventListener('DOMContentLoaded', loadKeys);
