@@ -1,0 +1,7 @@
+{
+  "yaml_files": [
+    "https://raw.githubusercontent.com/0xA9F9/sub/main/keys/key-1.yaml",
+    "https://raw.githubusercontent.com/0xA9F9/sub/main/keys/key-2.yaml",
+    "https://raw.githubusercontent.com/0xA9F9/sub/main/keys/key-3.yaml"
+  ]
+}
