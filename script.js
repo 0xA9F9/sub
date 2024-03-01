@@ -1,20 +1,23 @@
-// Загрузка JSON с паролем
-fetch('password.json')
-  .then(response => response.json())
-  .then(data => {
-    const correctPassword = data.password;
+document.addEventListener("DOMContentLoaded", function() {
+  fetch("videos.json")
+    .then(response => response.json())
+    .then(data => {
+      const videosContainer = document.getElementById("videos");
 
-    function checkPassword() {
-      const enteredPassword = document.getElementById("passwordInput").value;
-      if (enteredPassword === correctPassword) {
-        // Показать контент
-        document.getElementById("passwordDiv").style.display = "none";
-        document.getElementById("content").style.display = "block";
-      } else {
-        // Скрыть блок ввода пароля
-        document.getElementById("passwordDiv").style.display = "none";
-        alert("Неправильный пароль");
-      }
-    }
-  })
-  .catch(error => console.error('Ошибка при загрузке пароля:', error));
+      data.videos.forEach(video => {
+        const iframe = document.createElement("iframe");
+        iframe.width = "560";
+        iframe.height = "315";
+        iframe.src = `https://www.youtube.com/embed/${getVideoId(video.url)}`;
+        iframe.title = video.title;
+        iframe.allowFullscreen = true;
+        videosContainer.appendChild(iframe);
+      });
+    })
+    .catch(error => console.error("Error loading videos:", error));
+});
+
+function getVideoId(url) {
+  const match = url.match(/[?&]v=([^?&]+)/);
+  return match ? match[1] : null;
+}
