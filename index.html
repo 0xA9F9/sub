@@ -9,7 +9,7 @@
   <ul id="keys-list"></ul>
 
   <script>
-    fetch('https://api.github.com/repos/0xA9F9/sub/contents/keys')
+    fetch('https://api.github.com/repos/0xA9F9/sub/contents/keys/')
       .then(response => response.json())
       .then(files => {
         const keysList = document.getElementById('keys-list');
