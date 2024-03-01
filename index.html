@@ -3,31 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keys</title>
+<title>Password Protection</title>
 </head>
 <body>
-  <ul id="keys-list"></ul>
+    <div id="passwordDiv">
+        <input type="password" id="passwordInput" placeholder="Введите пароль">
+        <button onclick="checkPassword()">Войти</button>
+    </div>
+    <div id="content" style="display:none;">
+        <!-- Здесь ваш контент -->
+        <p>Ваш защищенный контент здесь</p>
+    </div>
 
-  <script>
-    fetch('links.json')
-      .then(response => response.json())
-      .then(data => {
-        const keysList = document.getElementById('keys-list');
-        data.json_files.forEach(file => {
-          fetch(file)
-            .then(response => response.json())
-            .then(jsonContent => {
-              if (jsonContent.keys) {
-                jsonContent.keys.forEach(key => {
-                  const listItem = document.createElement('li');
-                  listItem.textContent = key;
-                  keysList.appendChild(listItem);
-                });
-              }
-            });
-        });
-      })
-      .catch(error => console.error('Ошибка:', error));
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
