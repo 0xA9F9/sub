@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Список ключей</title>
-  <style> @media all { 
-  .z-z-z {
-    max-width: 500px;
-    width: 100%;
-    margin: 0 auto;
-    border: 1px solid;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-.search {
-    appearance: none;
-    border-bottom: 1px solid black;
-    padding: 5px;
-    outline: none;
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
-  } 
-} </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keys</title>
 </head>
 <body>
-  <div class="z-z-z">
-  <input type="text" id="searchInput" class="search" placeholder="Поиск по ключам">
-  <ul id="keyList" style="display: none;"></ul> <!-- Скрываем список ключей по умолчанию -->
+  <ul id="keys-list"></ul>
+
+  <script>
+    fetch('https://api.github.com/repos/0xA9F9/sub/contents/keys')
+      .then(response => response.json())
+      .then(files => {
+        const keysList = document.getElementById('keys-list');
+        files.forEach(file => {
+          if (file.type === 'file' && file.name.endsWith('.yaml')) {
+            fetch(file.download_url)
+              .then(response => response.text())
+              .then(yamlContent => {
+                const data = YAML.parse(yamlContent);
+                if (data.keys) {
+                  data.keys.forEach(key => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = key;
+                    keysList.appendChild(listItem);
+                  });
+                }
+              });
+          }
+        });
+      });
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-  <script src="keys.js"></script>
-  </div>
 </body>
 </html>
