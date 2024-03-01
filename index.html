@@ -8,7 +8,7 @@
 <body>
   <ul id="keys-list"></ul>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-  <script>
+<script>
   fetch('keys.json')
     .then(response => response.json())
     .then(data => {
@@ -19,20 +19,25 @@
           .then(response => response.text())
           .then(yamlContent => {
             console.log('Содержимое YAML файла:', yamlContent); // Проверяем, что содержимое YAML файла загружено
-            const data = jsyaml.safeLoad(yamlContent);
-            console.log('Обработанные данные из YAML:', data); // Проверяем, что данные из YAML файла обработаны корректно
-            if (data.keys) {
-              data.keys.forEach(key => {
-                const listItem = document.createElement('li');
-                listItem.textContent = key;
-                keysList.appendChild(listItem);
-              });
+            try {
+              const data = jsyaml.safeLoad(yamlContent);
+              console.log('Обработанные данные из YAML:', data); // Проверяем, что данные из YAML файла обработаны корректно
+              if (data.keys) {
+                data.keys.forEach(key => {
+                  const listItem = document.createElement('li');
+                  listItem.textContent = key;
+                  keysList.appendChild(listItem);
+                });
+              }
+            } catch (error) {
+              console.error('Ошибка при обработке YAML:', error); // Ловим ошибки обработки YAML
             }
           });
       });
     })
     .catch(error => console.error('Ошибка:', error));
 </script>
+
 
 </body>
 </html>
