@@ -3,41 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 <title>Keys</title>
 </head>
 <body>
   <ul id="keys-list"></ul>
-<script>
-  fetch('keys.json')
-    .then(response => response.json())
-    .then(data => {
-      console.log('Содержимое keys.json:', data); // Проверяем, что данные загружены
-      const keysList = document.getElementById('keys-list');
-      data.yaml_files.forEach(url => {
-        fetch(url)
-          .then(response => response.text())
-          .then(yamlContent => {
-            console.log('Содержимое YAML файла:', yamlContent); // Проверяем, что содержимое YAML файла загружено
-            try {
-              const data = jsyaml.safeLoad(yamlContent);
-              console.log('Обработанные данные из YAML:', data); // Проверяем, что данные из YAML файла обработаны корректно
-              if (data.keys) {
-                data.keys.forEach(key => {
+
+  <script>
+    fetch('links.json')
+      .then(response => response.json())
+      .then(data => {
+        const keysList = document.getElementById('keys-list');
+        data.json_files.forEach(file => {
+          fetch(file)
+            .then(response => response.json())
+            .then(jsonContent => {
+              if (jsonContent.keys) {
+                jsonContent.keys.forEach(key => {
                   const listItem = document.createElement('li');
                   listItem.textContent = key;
                   keysList.appendChild(listItem);
                 });
               }
-            } catch (error) {
-              console.error('Ошибка при обработке YAML:', error); // Ловим ошибки обработки YAML
-            }
-          });
-      });
-    })
-    .catch(error => console.error('Ошибка:', error));
-</script>
-
-
+            });
+        });
+      })
+      .catch(error => console.error('Ошибка:', error));
+  </script>
 </body>
 </html>
