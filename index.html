@@ -9,25 +9,23 @@
   <ul id="keys-list"></ul>
 
   <script>
-    fetch('https://api.github.com/repos/0xA9F9/sub/contents/keys')
+    fetch('keys.json')
       .then(response => response.json())
-      .then(files => {
+      .then(data => {
         const keysList = document.getElementById('keys-list');
-        files.forEach(file => {
-          if (file.type === 'file' && file.name.endsWith('.yaml')) {
-            fetch(file.download_url)
-              .then(response => response.text())
-              .then(yamlContent => {
-                const data = jsyaml.safeLoad(yamlContent);
-                if (data.keys) {
-                  data.keys.forEach(key => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = key;
-                    keysList.appendChild(listItem);
-                  });
-                }
-              });
-          }
+        data.yaml_files.forEach(url => {
+          fetch(url)
+            .then(response => response.text())
+            .then(yamlContent => {
+              const data = jsyaml.safeLoad(yamlContent);
+              if (data.keys) {
+                data.keys.forEach(key => {
+                  const listItem = document.createElement('li');
+                  listItem.textContent = key;
+                  keysList.appendChild(listItem);
+                });
+              }
+            });
         });
       })
       .catch(error => console.error('Ошибка:', error));
