@@ -8,7 +8,6 @@
 <body>
   <ul id="keys-list"></ul>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <script>
     fetch('https://api.github.com/repos/0xA9F9/sub/contents/keys')
       .then(response => response.json())
@@ -19,7 +18,7 @@
             fetch(file.download_url)
               .then(response => response.text())
               .then(yamlContent => {
-                const data = YAML.parse(yamlContent);
+                const data = yaml.safeLoad(yamlContent); // Используем safeLoad из js-yaml
                 if (data.keys) {
                   data.keys.forEach(key => {
                     const listItem = document.createElement('li');
@@ -30,7 +29,9 @@
               });
           }
         });
-      });
+      })
+      .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </body>
 </html>
