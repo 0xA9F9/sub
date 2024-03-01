@@ -1,43 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Password Protection</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Videos</title>
 </head>
 <body>
-    <div id="passwordDiv">
-        <input type="password" id="passwordInput" placeholder="Введите пароль">
-        <button onclick="checkPassword()">Войти</button>
-    </div>
-    <div id="content" style="display:none;">
-        <!-- Здесь ваш контент -->
-        <p>Ваш защищенный контент здесь</p>
-    </div>
+  <div id="videos"></div>
 
-    <script>let correctPassword;
-
-// Загрузка JSON с паролем
-fetch('password.json')
-  .then(response => response.json())
-  .then(data => {
-    correctPassword = data.password;
-  })
-  .catch(error => console.error('Ошибка при загрузке пароля:', error));
-
-function checkPassword() {
-  const enteredPassword = document.getElementById("passwordInput").value;
-  if (enteredPassword === correctPassword) {
-    // Показать контент
-    document.getElementById("passwordDiv").style.display = "none";
-    document.getElementById("content").style.display = "block";
-  } else {
-    // Скрыть блок ввода пароля
-    document.getElementById("passwordDiv").style.display = "none";
-    alert("Неправильный пароль");
-  }
-}
-
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
